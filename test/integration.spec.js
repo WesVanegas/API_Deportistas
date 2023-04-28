@@ -1,7 +1,7 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
 //const Usuario = require('../models/Users')
-import Usuario from '../models/Users';
+import Deportista from '../models/Deportista';
 
 //Importar app de index.js
 import app from '../index'
@@ -16,11 +16,11 @@ beforeAll(async ()=>{
 describe('Get /api/users', ()=>{
   it('Deberias obtener todos los usuarios', async () =>{
     //Crear algunos usuarios
-    const usuarios = [
-      { nombresUsuario: 'Maria José', celularUsuario: 3124567832},
-      { nombresUsuario: 'Juan Perez', celularUsuario: 3117653451}
+    const deportistas = [
+      { nombre: 'Maria', apellidos: 'Vanegas', edad:20, celular:3124567832, deporte: 'Futbol', genero:'Femenino' },
+      { nombre: 'Mario', apellidos: 'Vanegas', edad:20, celular:31245678342, deporte: 'Futbol', genero:'Masculino' }
     ];
-    await Usuario.insertMany(usuarios);
+    await Deportista.insertMany(deportistas);
 
     //Hacer solicitud Get a /usuarios
     const response = await request(app).get('/api/users');
@@ -29,15 +29,19 @@ describe('Get /api/users', ()=>{
     expect(response.status).toBe(200);
 
     //Verificar que la respuesta tenga los usuarios creados
-    expect(response.body).toHaveLength(usuarios.length);
-    expect(response.body[0].nombresUsuario).toBe(usuarios[0].nombresUsuario);
-    expect(response.body[1].celularUsuario).toBe(usuarios[1].celularUsuario);
+    expect(response.body).toHaveLength(deportistas.length);
+    expect(response.body[0].nombre).toBe(deportistas[0].nombre);
+    expect(response.body[1].apellidos).toBe(deportistas[1].apellidos);
+    //expect(response.body[2].edad).toBe(deportistas[2].edad);
+    //expect(response.body[3].celular).toBe(deportistas[3].celular);
+    //expect(response.body[4].deporte).toBe(deportistas[4].deporte);
+    //expect(response.body[5].genero).toBe(deportistas[5].genero);
   });
 });
 
 //Limpiar las colecciones de la base de datos después de las pruebas
 afterEach(async ()=>{
-  await Usuario.deleteMany();
+  await Deportista.deleteMany();
 });
 
 //Cerrar la conexion con la base de datos despues de terminar las pruebas
