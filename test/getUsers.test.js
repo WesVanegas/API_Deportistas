@@ -1,3 +1,7 @@
+const request = require('supertest');
+
+import app from "..";
+
 describe('GET /api/users', ()=>{
   test('Deberia retornar una lista de usuarios', async ()=>{
     const res = await request(app).get('/api/users');

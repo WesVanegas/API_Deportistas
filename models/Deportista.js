@@ -1,25 +1,55 @@
 import mongoose from "mongoose";
 
 /**
- * @swagger
- * components:
- *   schemas:
- *     Usuario:
- *       type: object
- *       required:
- *         - nombresUsuario
- *         - celularUsuario
- *       properties:
- *         nombresUsuario:
- *           type: string
- *           description: Nombre del usuario.
- *         celularUsuario:
- *           type: number
- *           description: Número de celular del usuario
- *       example:
- *         nombresUsuario: Veronica
- *         celularUsuario: 3145763456
- */
+* @swagger
+* components:
+*   schemas:
+*     Deportista:
+*       type: object
+*       required:
+*         -nombre
+*         -apellidos
+*         -edad
+*         -celular
+*         -deporte
+*         -genero 
+*  
+*       properties:
+*         nombre:
+*           type: string
+*           description: Nombre del deportista.
+* 
+*         apellidos:
+*           type: string
+*           description: apellidos del deportista.
+*  
+*           edad:
+*             type: number,
+*             description: edad del deportista.
+*  
+*          celular:
+*             type: number,
+*             description: celular del deportista.
+*  
+*           deporte:
+*              type: string,
+*              description: deporte que practica el deportista.
+*           
+*           genero:
+*              type: string,
+*              description: genero del deportista.
+*               
+*       example:
+*         nombre: Veronica
+*         apellidos: sanchez rodriguez
+*         edad: 25
+*         celular: 3145763456
+*         deporte: futbol
+*         genero: binario
+* 
+* 
+* 
+*/
 
 const deportistaSchema = mongoose.Schema({
   nombre:{

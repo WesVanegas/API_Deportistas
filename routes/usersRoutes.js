@@ -13,41 +13,67 @@ import {
  * @swagger
  * tags:
  *   name: Users
- *   description: API Gestion Usuarios
+ *   description: API Gestion Deportistas
  */
 
 /**
- * @swagger
- * components:
- *   schemas:
- *     User:
- *       type: objet
- *       required:
- *         - nombresUsuario
- *         - celularUsuario
- *       properties:
- *         id:
- *           type: string
- *           description: ID generado automaticamente por mongoDB
- *         nombresUsuario:
- *           type: string
- *           description: Nombre completo del usuario
- *         celularUsuario:
- *           type: number
- *           description: Número celular del usuario
- *       example:
- *         id: 6447f75de574d20290c67671
- *         nombresUsurio: Yuliet D
- *         celularUsurio: 3114763687
- */
+* @swagger
+* components:
+*   schemas:
+*     User:
+*       type: object
+*       required:
+*         -nombre
+*         -apellidos
+*         -edad
+*         -celular
+*         -deporte
+*         -genero 
+*       properties:
+*         id:
+*           type: string
+*           description: id general automaticamente por mongo
+*
+*         nombre:
+*           type: string
+*           description: Nombre del deportista.
+* 
+*         apellidos:
+*           type: string
+*           description: apellidos del deportista.
+*  
+*         edad:
+*           type: number,
+*           description: edad del deportista.
+*  
+*         celular:
+*           type: number,
+*           description: celular del deportista.
+*  
+*         deporte:
+*            type: string,
+*            description: deporte que practica el deportista.
+*           
+*         genero:
+*            type: string,
+*            description: genero del deportista.
+*               
+*       example:
+*         nombre: Veronica
+*         apellidos: sanchez rodriguez
+*         edad: 25
+*         celular: 3145763456
+*         deporte: futbol
+*         genero: binario
+*/
 
-//Ruta es para gestionar usuarios
+//Ruta es para gestionar deportistas.
 
 /**
  * @swagger
- * /api/users:
+ * /users:
  *   post:
- *     summary: Agregar nuevo usuario
+ *     summary: Agregar nuevo deportista
  *     tags: [Users]
  *     requestBody:
  *       required: true
@@ -57,26 +83,26 @@ import {
  *             $ref: '#/components/schemas/User'
  *     responses:
  *       200:
- *         description: Usuario agregado exitosamente
+ *         description: Deportista agregado exitosamente
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/User'
  *       400:
- *         description: Los campos nombresUsuario y celularUsuario son requeridos
+ *         description: Los campos nombre, apellidos, edad, celular, deporte y genero son requeridos
  */
 
 router.post('/', agregar);
 
 /**
  * @swagger
- * /api/users:
+ * /users:
  *   get:
- *     summary: Obtener todos los usuarios
+ *     summary: Obtener todos los deportistas
  *     tags: [Users]
  *     responses:
  *       200:
- *         description: Lista de todos los usuarios
+ *         description: Lista de todos los deportistas
  *         content:
  *           application/json:
  *             schema:
@@ -88,9 +114,9 @@ router.get('/', listar);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /users/{id}:
  *   get:
- *     summary: Obtiene un usuario por su ID
+ *     summary: Obtiene un deportista por su ID
  *     tags: [Users]
  *     parameters:
  *       - in: path
@@ -98,25 +124,25 @@ router.get('/', listar);
  *         schema:
  *           type: string
  *         required: true
- *         description: ID del usuario a consultar
+ *         description: ID del deportista a consultar
  *     responses:
  *       200:
- *         description: Usuario encontrado exitosamente
+ *         description: Deportista encontrado exitosamente
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/User'
  *       404:
- *         description: El usuarion con el ID especifico no fue encontrado
+ *         description: El deportista con el ID especifico no fue encontrado
  */
 
 router.get('/:id', listarUno);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /users/{id}:
  *   put:
- *     summary: Actualizar usuario existente
+ *     summary: Actualizar deportista existente
  *     tags: [Users]
  *     parameters:
  *       - in: path
@@ -124,7 +150,7 @@ router.get('/:id', listarUno);
  *         schema:
  *           type: string
  *         required: true
- *         description: ID del usuario a actualizar
+ *         description: ID del deportista a actualizar
  *     requestBody:
  *       required: true
  *       content:
@@ -133,18 +159,18 @@ router.get('/:id', listarUno);
  *             $ref: '#/components/schemas/User'
  *     responses:
  *       200:
- *         description: Usuario actualizado exitosamente
+ *         description: Deportista actualizado exitosamente
  *       404:
- *         description: El usuario con el id especificado no fue editado
+ *         description: El deportista con el id especificado no fue editado
  */
 
 router.put('/:id', editar);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /users/{id}:
  *   delete:
- *     summary: Eliminar usuario existente
+ *     summary: Eliminar deportista existente
  *     tags: [Users]
  *     parameters:
  *       - in: path
@@ -152,7 +178,7 @@ router.put('/:id', editar);
  *         schema:
  *           type: string
  *         required: true
- *         description: ID del usuario a eliminar
+ *         description: ID del deportista a eliminar
  *     requestBody:
  *       required: true
  *       content:
@@ -161,9 +187,9 @@ router.put('/:id', editar);
  *             $ref: '#/components/schemas/User'
  *     responses:
  *       200:
- *         description: Usuario eliminado exitosamente
+ *         description: Deportista eliminado exitosamente
  *       404:
- *         description: El usuario con el id especificado no fue eliminado
+ *         description: El deportista con el id especificado no fue eliminado
  */
 
 router.delete('/:id', eliminar);

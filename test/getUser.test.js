@@ -1,3 +1,7 @@
+const request = require('supertest');
+
+import app from "..";
+
 describe('GET /api/users/:id', ()=>{
   test('Deberia obtener un usuario por su ID', async()=>{
     const res = await request(app).get(`/api/users/${newUserId}`);
